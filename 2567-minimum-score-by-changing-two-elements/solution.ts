@@ -1,3 +1,4 @@
+// solved [x]
 function minimizeSum(nums: number[]): number {
   const sorted = nums.sort((a, b) => a - b);
   const n = sorted.length;

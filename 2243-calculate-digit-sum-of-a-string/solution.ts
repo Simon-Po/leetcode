@@ -1,3 +1,4 @@
+// solved [x]
 function digitSum(s: string, k: number): string {
   let temp = s;
   while (temp.length > k) {

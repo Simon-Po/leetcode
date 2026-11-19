@@ -1,3 +1,4 @@
+// solved [x]
 function minChanges(s: string): number {
   if (
     s.split("").every((x) => x === "0") ||

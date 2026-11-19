@@ -1,3 +1,4 @@
+// solved [x]
 function busiestServers(
   k: number,
   arrival: number[],

@@ -1,3 +1,4 @@
+// solved [x]
 function longestMonotonicSubarray(nums: number[]): number {
   let w = windows(nums);
   return w
