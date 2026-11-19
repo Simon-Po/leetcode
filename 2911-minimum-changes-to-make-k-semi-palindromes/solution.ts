@@ -1,4 +1,4 @@
-// solved [x]
+// solved [x] 2026-11-17
 function minimumChanges(s: string, k: number): number {
   const memo = new Map<string, number>();
   const pieceCosts = new Map<string, number>();

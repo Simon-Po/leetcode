@@ -1,4 +1,4 @@
-// solved [x]
+// solved [x] 2026-11-16
 function digitSum(s: string, k: number): string {
   let temp = s;
   while (temp.length > k) {

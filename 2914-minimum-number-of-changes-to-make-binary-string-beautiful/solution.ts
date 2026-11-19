@@ -1,4 +1,4 @@
-// solved [x]
+// solved [x] 2026-11-18
 function minChanges(s: string): number {
   if (
     s.split("").every((x) => x === "0") ||

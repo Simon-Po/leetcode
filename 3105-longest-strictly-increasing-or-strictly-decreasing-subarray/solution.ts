@@ -1,4 +1,4 @@
-// solved [x]
+// solved [x] 2026-11-12
 function longestMonotonicSubarray(nums: number[]): number {
   let w = windows(nums);
   return w

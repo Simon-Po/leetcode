@@ -32,7 +32,7 @@ jobs:
 
           {
             sed '/^<!-- solved:start -->$/q' README.md
-            printf '| Problem | Difficulty | Solution |\n| ---: | :--- | :--- |\n'
+            printf '| Date | Problem | Difficulty | Solution |\n| :--- | ---: | :--- | :--- |\n'
 
             find . -mindepth 2 -maxdepth 2 -type f -name solution.ts -printf '%P\n' \
               | sort -n \
@@ -42,7 +42,14 @@ jobs:
                   number=${BASH_REMATCH[1]}
                   slug=${BASH_REMATCH[2]}
 
-                  [[ "$(head -n 1 "$solution")" == '// solved [x]' ]] || continue
+                  marker=$(head -n 1 "$solution")
+                  [[ $marker == '// solved [x]'* ]] || continue
+                  challenge_date=${marker#'// solved [x] '}
+                  if [[ ! $challenge_date =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] ||
+                      ! date -u -d "$challenge_date" +%F >/dev/null 2>&1; then
+                    printf 'Expected // solved [x] YYYY-MM-DD on the first line of %s\n' "$solution" >&2
+                    exit 1
+                  fi
 
                   query=$(jq -nc --arg slug "$slug" '{
                     query: "query ($slug: String!) { question(titleSlug: $slug) { difficulty } }",
@@ -55,9 +62,10 @@ jobs:
                     exit 1
                   fi
 
-                  printf '| [%s](https://leetcode.com/problems/%s/) | %s | [TypeScript](%s) |\n' \
-                    "$number" "$slug" "$difficulty" "$solution"
-                done
+                  printf '| %s | [%s](https://leetcode.com/problems/%s/) | %s | [TypeScript](%s) |\n' \
+                    "$challenge_date" "$number" "$slug" "$difficulty" "$solution"
+                done \
+              | LC_ALL=C sort -s -t '|' -k2,2r
 
             sed -n '/^<!-- solved:end -->$/,$p' README.md
           } > README.new

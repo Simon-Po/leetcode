@@ -1,4 +1,4 @@
-// solved [x]
+// solved [] 2026-11-09
 function busiestServers(
   k: number,
   arrival: number[],
@@ -13,19 +13,16 @@ function busiestServers(
     const arrivalTime = arrival[i]!;
     const currentRequestLoad = load[i]!;
 
-    if(servers[i].busy) {
-      let serverFound = false
+    if (servers[i].busy) {
+      let serverFound = false;
       let serverToUse;
-      while(!serverFound) {
-        let next = (i+1) % arrival.length
-        if(!servers[next].busy){
-         serverToUse = next
+      while (!serverFound) {
+        let next = (i + 1) % arrival.length;
+        if (!servers[next].busy) {
+          serverToUse = next;
           break;
         }
       }
-
-
-      }
-
+    }
   }
 }
