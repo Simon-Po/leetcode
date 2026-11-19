@@ -1,0 +1,16 @@
+{
+  "id": "3174",
+  "slug": "minimum-number-of-changes-to-make-binary-string-beautiful",
+  "meta": {
+    "name": "minChanges",
+    "params": [
+      {
+        "name": "s",
+        "type": "string"
+      }
+    ],
+    "return": {
+      "type": "integer"
+    }
+  }
+}

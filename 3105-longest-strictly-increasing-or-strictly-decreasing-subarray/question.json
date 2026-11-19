@@ -1,0 +1,16 @@
+{
+  "id": "3372",
+  "slug": "longest-strictly-increasing-or-strictly-decreasing-subarray",
+  "meta": {
+    "name": "longestMonotonicSubarray",
+    "params": [
+      {
+        "name": "nums",
+        "type": "integer[]"
+      }
+    ],
+    "return": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+name: Update README
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*/solution.ts"
+      - ".github/workflows/update-readme.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: update-readme-${{ github.ref }}
+
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update solved problems
+        shell: bash
+        run: |
+          if [[ "$(grep -xE '<!-- solved:(start|end) -->' README.md)" != $'<!-- solved:start -->\n<!-- solved:end -->' ]]; then
+            echo 'Expected one pair of solved table markers in README.md' >&2
+            exit 1
+          fi
+
+          {
+            sed '/^<!-- solved:start -->$/q' README.md
+            printf '| Problem | Difficulty | Solution |\n| ---: | :--- | :--- |\n'
+
+            find . -mindepth 2 -maxdepth 2 -type f -name solution.ts -printf '%P\n' \
+              | sort -n \
+              | while IFS= read -r solution; do
+                  directory=${solution%/solution.ts}
+                  [[ $directory =~ ^([1-9][0-9]*)-([a-z0-9-]+)$ ]] || continue
+                  number=${BASH_REMATCH[1]}
+                  slug=${BASH_REMATCH[2]}
+
+                  [[ "$(head -n 1 "$solution")" == '// solved [x]' ]] || continue
+
+                  query=$(jq -nc --arg slug "$slug" '{
+                    query: "query ($slug: String!) { question(titleSlug: $slug) { difficulty } }",
+                    variables: {slug: $slug}
+                  }')
+                  if ! difficulty=$(curl --fail --silent --show-error --retry 2 --max-time 15 \
+                      --json "$query" https://leetcode.com/graphql/ \
+                      | jq -er '.data.question.difficulty | select(. == "Easy" or . == "Medium" or . == "Hard")'); then
+                    printf 'Could not look up difficulty for %s\n' "$slug" >&2
+                    exit 1
+                  fi
+
+                  printf '| [%s](https://leetcode.com/problems/%s/) | %s | [TypeScript](%s) |\n' \
+                    "$number" "$slug" "$difficulty" "$solution"
+                done
+
+            sed -n '/^<!-- solved:end -->$/,$p' README.md
+          } > README.new
+          mv README.new README.md
+
+      - name: Commit changes
+        run: |
+          git diff --quiet -- README.md && exit 0
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add README.md
+          git commit -m "Update solved problems"
+          git push origin HEAD:main

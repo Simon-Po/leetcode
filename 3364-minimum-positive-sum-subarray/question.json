@@ -1,0 +1,24 @@
+{
+  "id": "3644",
+  "slug": "minimum-positive-sum-subarray",
+  "meta": {
+    "name": "minimumSumSubarray",
+    "params": [
+      {
+        "name": "nums",
+        "type": "list<integer>"
+      },
+      {
+        "type": "integer",
+        "name": "l"
+      },
+      {
+        "type": "integer",
+        "name": "r"
+      }
+    ],
+    "return": {
+      "type": "integer"
+    }
+  }
+}

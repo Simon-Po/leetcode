@@ -1,0 +1,20 @@
+{
+  "id": "2361",
+  "slug": "calculate-digit-sum-of-a-string",
+  "meta": {
+    "name": "digitSum",
+    "params": [
+      {
+        "name": "s",
+        "type": "string"
+      },
+      {
+        "type": "integer",
+        "name": "k"
+      }
+    ],
+    "return": {
+      "type": "string"
+    }
+  }
+}

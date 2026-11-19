@@ -1,0 +1,20 @@
+{
+  "id": "2879",
+  "slug": "minimum-changes-to-make-k-semi-palindromes",
+  "meta": {
+    "name": "minimumChanges",
+    "params": [
+      {
+        "name": "s",
+        "type": "string"
+      },
+      {
+        "type": "integer",
+        "name": "k"
+      }
+    ],
+    "return": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "4041",
+  "slug": "climbing-stairs-ii",
+  "meta": {
+    "name": "climbStairs",
+    "params": [
+      {
+        "name": "n",
+        "type": "integer"
+      },
+      {
+        "type": "integer[]",
+        "name": "costs"
+      }
+    ],
+    "return": {
+      "type": "integer"
+    }
+  }
+}
