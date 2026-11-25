@@ -6,6 +6,7 @@ My solutions for daily leetcode problems mostly in typescript.
 <!-- solved:start -->
 | Date | Problem | Difficulty | Solution |
 | :--- | ---: | :--- | :--- |
+| 2026-11-25 | [3934](https://leetcode.com/problems/smallest-unique-subarray/) | Hard | [TypeScript](3934-smallest-unique-subarray/solution.ts) |
 | 2026-11-19 | [2567](https://leetcode.com/problems/minimum-score-by-changing-two-elements/) | Medium | [TypeScript](2567-minimum-score-by-changing-two-elements/solution.ts) |
 | 2026-11-18 | [2914](https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/) | Medium | [TypeScript](2914-minimum-number-of-changes-to-make-binary-string-beautiful/solution.ts) |
 | 2026-11-17 | [2911](https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/) | Hard | [TypeScript](2911-minimum-changes-to-make-k-semi-palindromes/solution.ts) |
