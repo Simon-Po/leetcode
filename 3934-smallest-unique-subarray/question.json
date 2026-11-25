@@ -1,0 +1,16 @@
+{
+  "id": "4105",
+  "slug": "smallest-unique-subarray",
+  "meta": {
+    "name": "smallestUniqueSubarray",
+    "params": [
+      {
+        "name": "nums",
+        "type": "integer[]"
+      }
+    ],
+    "return": {
+      "type": "integer"
+    }
+  }
+}
